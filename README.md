@@ -12,5 +12,4 @@ Implementar un programa que permita colocar una plano infinito o esfera cargados
 - Distancia de máximo alejamiento en metros.
 - Para la esfera, la velocidad de escape o bien, si la esfera se ha convertido en un agujero negro electrostático.
 
-## Bono: que puedan dispararse partículas conocidas como protones, positrones,
-partículas alfa. Núcleos de algunos átomos. Mínimo 5 distintos.
+### Bono: que puedan dispararse partículas conocidas como protones, positrones, partículas alfa. Núcleos de algunos átomos. Mínimo 5 distintos.
