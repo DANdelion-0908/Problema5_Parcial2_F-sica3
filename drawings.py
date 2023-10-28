@@ -88,7 +88,7 @@ def Sphere(radius: float, t1: turtle):
 
 
     #Making the inner circle
-    DrawCircle(t1, radius/10, radius/10 * 0.20, 0.5, "darkblue")
+    DrawCircle(t1, radius/10, radius/10 * 0.30, 0.5, "darkblue")
 
 #Function to draw a grid
 def draw_grid(step, size,turtle):
