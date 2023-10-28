@@ -11,12 +11,12 @@ def DrawCircle(tr: turtle, height: float, width: float, outline: float, color: s
     tr.shapesize(height, width, outline)
     tr.fillcolor(color)
 
-def Sphere(radius: float):
+def Sphere(radius: float, t1: turtle):
+
     #Initial setup
-    t1 = turtle.Turtle()
-    t1.pensize(1)
+    t1.pensize(5)
     t1.penup()
-    t1.goto(0, -1*radius)
+    t1.teleport(0, -1*radius)
     t1.pendown()
 
     #Drawing half of the circle
@@ -37,10 +37,9 @@ def Sphere(radius: float):
     t1.forward(radius)
     t1.pendown()
 
+
     #Making the inner circle
     DrawCircle(t1, radius/10, radius/10 * 0.20, 0.5, "darkblue")
-
-    turtle.exitonclick()
 
 #Function to draw a grid
 def draw_grid(step, size,turtle):
