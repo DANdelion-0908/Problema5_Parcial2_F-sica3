@@ -12,6 +12,28 @@ def figureEnabler():
         notebook.add(planeFrame, text="Plano")
         notebook.forget(sphereFrame)
 
+# Button Enabler
+def buttonEnabler():
+    sphereElements = [radioEntry.get(), chargeEntry.get(), particleList.get(), particleChargeEntry.get(), weightEntry.get(), speedEntry.get()]
+    planeElements = [densityEntry.get() ,particleChargeEntry.get(), particleList.get(), weightEntry.get(), speedEntry.get()]
+    selection = figureSelection.get()
+    if(selection == 1):
+        if all(elements is not "" for elements in sphereElements):
+            print("Funca")
+
+        else:
+            print("Faltan campos")
+
+    elif(selection == 2):
+        if all(elements is not None for elements in planeElements):
+            print("Funca")
+
+        else:
+            print("Faltan campos")
+
+    else:
+        print("Faltan campos")
+
 # Main Window
 root = tk.Tk()
 # root.config(width=500, height=500)
@@ -55,8 +77,8 @@ planeRadiobutton = ttk.Radiobutton(shapeFrame,
 radioLabel = ttk.Label(sphereFrame, text="Radio: ")
 chargeLabel = ttk.Label(sphereFrame, text="Carga: ")
 
-radioEntry = ttk.Spinbox(sphereFrame, from_=0, to=200, increment=0.1)
-chargeEntry = ttk.Spinbox(sphereFrame, from_=0, to=200, increment=0.1)
+radioEntry = ttk.Spinbox(sphereFrame, from_=0.5, to=200, increment=0.1, format="%.1f m")
+chargeEntry = ttk.Spinbox(sphereFrame, from_=0.5, to=200, increment=0.1, format="%.1f C")
 
 radioLabel.grid(row=0, column=0, sticky= tk.W, pady=10)
 chargeLabel.grid(row=1, column=0, sticky=tk.W)
@@ -67,7 +89,7 @@ chargeEntry.grid(row=1, column=1, sticky=tk.W)
 # Plane Frame
 densityLabel = ttk.Label(planeFrame, text="Densidad de carga: ")
 
-densityEntry = ttk.Spinbox(planeFrame, from_=0, to=500, increment=0.1)
+densityEntry = ttk.Spinbox(planeFrame, from_=0.5, to=500, increment=0.1, format="%.1f C/m^2")
 
 densityLabel.grid(row=0, column=0, sticky=tk.W, pady=20)
 densityEntry.grid(row=0, column=1, sticky=tk.W)
@@ -78,11 +100,11 @@ particleChargeLabel = ttk.Label(particleFrame, text="Carga: ")
 weightLabel = ttk.Label(particleFrame, text="Masa: ")
 speedLabel = ttk.Label(particleFrame, text="Velocidad Inicial: ")
 
-particleChargeEntry = ttk.Spinbox(particleFrame, from_=0, to=500, increment=0.1)
-weightEntry = ttk.Spinbox(particleFrame, from_=0, to=100, increment=0.1)
-speedEntry = ttk.Spinbox(particleFrame, from_=0, to=500, increment=0.1)
+particleChargeEntry = ttk.Spinbox(particleFrame, from_=0.5, to=500, increment=0.1, format="%.1f C")
+weightEntry = ttk.Spinbox(particleFrame, from_=0.5, to=100, increment=0.1, format="%.1f kg")
+speedEntry = ttk.Spinbox(particleFrame, from_=0.5, to=500, increment=0.1, format="%.1f m/s")
 
-particleList = ttk.Combobox(particleFrame, state="readonly", values=["Protón","Neutrón", "Electrón"])
+particleList = ttk.Combobox(particleFrame, state="readonly", values=["Protón","Neutrón", "Electrón", "Partícula Alfa"])
 
 particleLabel.grid(row=0, column=0, sticky=tk.W, pady=10)
 particleChargeLabel.grid(row=1, column=0, sticky=tk.W)
@@ -95,7 +117,8 @@ weightEntry.grid(row=2, column=1, sticky=tk.W)
 speedEntry.grid(row=3, column=1, sticky=tk.W)
 
 # Confirm Button
-confirmButton = ttk.Button(root, text='Confirmar', state=tk.DISABLED).pack(fill=tk.X)
+confirmButton = ttk.Button(root, text='Confirmar', command=buttonEnabler)
+confirmButton.pack(fill=tk.X)
 
 # Main process
 root.mainloop()
