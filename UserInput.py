@@ -15,8 +15,8 @@ def figureEnabler():
 
 # Button Enabler
 def buttonEnabler():
-    sphereElements = [radioEntry.get(), chargeEntry.get(), particleList.get(), particleChargeEntry.get(), weightEntry.get(), speedEntry.get()]
-    planeElements = [densityEntry.get() ,particleChargeEntry.get(), particleList.get(), weightEntry.get(), speedEntry.get()]
+    sphereElements = ["sphere", radioEntry.get(), chargeEntry.get(), particleList.get(), particleChargeEntry.get(), weightEntry.get(), speedEntry.get()]
+    planeElements = ["plane", densityEntry.get() ,particleChargeEntry.get(), particleList.get(), weightEntry.get(), speedEntry.get()]
     selection = figureSelection.get()
     if(selection == 1):
         if all(elements != "" for elements in sphereElements):
@@ -26,7 +26,7 @@ def buttonEnabler():
             print("Faltan campos")
 
     elif(selection == 2):
-        if all(elements != None for elements in planeElements):
+        if all(elements != "" for elements in planeElements):
             Simulation.Simulation(planeElements)
 
         else:

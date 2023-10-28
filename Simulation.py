@@ -1,5 +1,6 @@
 from drawings import *
 import turtle
+from axis import *
 
 
 def Simulation(figureList: list):
@@ -10,16 +11,25 @@ def Simulation(figureList: list):
     gorge = turtle.Turtle()
     turtle.tracer(False)
     turtle.update()
-    screensize = 300
-    actualscreen = 2000 #resolucion de la pantalla
+    verticalScreensize = 800
+    horizontalScreenSize = 2000 #resolucion de la pantalla
 
-    draw_grid(10, actualscreen, turtle=gorge)
+    draw_grid(10, horizontalScreenSize, turtle=gorge)
+    #In this section we evaluate which sphere was sent by the UI
+    if(figureList[0] == "sphere"):
+        Sphere(float (figureList[1]), gorge)
+
+    elif(figureList[0] == "plane"):
+        InfinitePlain(200, gorge)
+        
+    drawAxis(verticalScreensize / 2)
 
     turtle.tracer(True)
     turtle.update()
 
-    turtle.screensize(actualscreen,801)
+    turtle.setup(800, verticalScreensize - 150)
+    turtle.screensize(horizontalScreenSize, verticalScreensize)
 
-    Sphere(float (figureList[0]), gorge)
+    
 
     turtle.done()
