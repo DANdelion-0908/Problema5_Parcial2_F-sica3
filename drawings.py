@@ -1,6 +1,7 @@
 import turtle
 from turtle import RawTurtle, ScrolledCanvas
 import decimal
+import math
 
 def DrawCircle(tr: turtle, height: float, width: float, outline: float, color: str):
     tr.pensize(outline)
@@ -10,6 +11,54 @@ def DrawCircle(tr: turtle, height: float, width: float, outline: float, color: s
     tr.shape("circle")
     tr.shapesize(height, width, outline)
     tr.fillcolor(color)
+
+def InfinitePlain(ScreenHeight: float, t2: turtle):
+    
+    xWidth = ScreenHeight * 0.2
+    zLength: float = ScreenHeight
+    t2.penup()
+    t2.setpos(- (xWidth/2 + math.sin(math.pi / 4) * zLength) / 2,0)
+    t2.pendown()
+    t2.speed(10)
+
+    t2.pensize(1)
+    t2.fillcolor("Blue")
+    t2.begin_fill()
+    t2.seth(90)
+    t2.forward(ScreenHeight)
+
+
+    t2.seth(45)
+    t2.forward(zLength)
+    t2.seth(0)
+    t2.backward(xWidth)
+    t2.seth(45)
+    t2.backward(zLength)
+    t2.seth(0)
+    t2.forward(xWidth)
+
+    t2.backward(xWidth)
+    t2.seth(-90)
+    t2.forward(2*ScreenHeight)
+    t2.seth(0)
+    t2.forward(xWidth)
+    t2.seth(90)
+    t2.forward(ScreenHeight)
+    t2.end_fill()
+
+    t2.backward(ScreenHeight)
+    t2.fillcolor("darkblue")
+    t2.begin_fill()
+    t2.seth(45)
+    t2.forward(zLength)
+
+    t2.seth(90)
+    t2.forward(2*ScreenHeight)
+    t2.seth(45)
+    t2.backward(zLength)
+    t2.end_fill()
+
+    t2.hideturtle()
 
 def Sphere(radius: float, t1: turtle):
 
@@ -57,10 +106,7 @@ def draw_grid(step, size,turtle):
 
 #Funcion principal para test
 
+t2 = turtle.Turtle()
+Sphere(100, t2)
 
-
-
-
-
-
-
+turtle.done()
