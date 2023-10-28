@@ -1,4 +1,5 @@
 import turtle
+from turtle import RawTurtle, ScrolledCanvas
 import decimal
 
 def DrawCircle(tr: turtle, height: float, width: float, outline: float, color: str):
@@ -56,11 +57,6 @@ def draw_grid(step, size,turtle):
         turtle.goto(size, i)
 
 #Funcion principal para test
-
-
-radius: decimal = 30
-
-Sphere(radius)
 
 
 
