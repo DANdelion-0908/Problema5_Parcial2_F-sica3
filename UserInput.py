@@ -87,6 +87,9 @@ chargeLabel.grid(row=1, column=0, sticky=tk.W)
 radioEntry.grid(row=0, column=1, sticky=tk.W, pady=10)
 chargeEntry.grid(row=1, column=1, sticky=tk.W)
 
+radioDimension = ttk.Label(sphereFrame, text="m").grid(row=0, column=2)
+sphereChargeDimension = ttk.Label(sphereFrame, text="C").grid(row=1, column=2)
+
 # Plane Frame
 densityLabel = ttk.Label(planeFrame, text="Densidad de carga: ")
 
@@ -94,6 +97,7 @@ densityEntry = ttk.Spinbox(planeFrame, from_=0.5, to=500, increment=0.1)
 
 densityLabel.grid(row=0, column=0, sticky=tk.W, pady=20)
 densityEntry.grid(row=0, column=1, sticky=tk.W)
+densityDimension = ttk.Label(planeFrame, text="C/m^2").grid(row=0, column=2)
 
 # Particle Frame
 particleLabel = ttk.Label(particleFrame, text="Partícula: ")
@@ -116,6 +120,10 @@ particleList.grid(row=0, column=1, sticky=tk.W)
 particleChargeEntry.grid(row=1, column=1, sticky=tk.W)
 weightEntry.grid(row=2, column=1, sticky=tk.W)
 speedEntry.grid(row=3, column=1, sticky=tk.W)
+
+chargeDimension = ttk.Label(particleFrame, text="C").grid(row=1, column=2)
+weightDimension = ttk.Label(particleFrame, text="kg").grid(row=2, column=2)
+speedDimension = ttk.Label(particleFrame, text="m/s").grid(row=3, column=2)
 
 # Confirm Button
 confirmButton = ttk.Button(root, text='Confirmar', command=buttonEnabler)
