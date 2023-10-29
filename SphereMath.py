@@ -1,6 +1,7 @@
 import turtle
 import decimal
 import math
+import time
 
 def calculateInitialElectricPotentialEnergy(Q: float, q: float, r: float):
     #Epsillon 0 constant, dielectric constante fo the void
@@ -22,8 +23,8 @@ def calculateInitialElectricPotentialEnergy(Q: float, q: float, r: float):
 
 
 def calculateMinimumScapeVelocity(Ki: float, m: float):
-    #Initial Kinetic energy (on infinity, initial electric potential energy = initial kinetic energy)
-    Ki = -decimal.Decimal(Ki)
+    #Initial Kinetic energy (on infinity, initial electric potential energy = + initial kinetic energy)
+    Ki = abs(decimal.Decimal(Ki))
     #Mass of the particle
     m = decimal.Decimal(m)
 
@@ -33,7 +34,7 @@ def calculateMinimumScapeVelocity(Ki: float, m: float):
     Vi = round(Vi, 1)
     return Vi
 
-def calculateMaximumDistance(Q:float, q:float, m: float, Vi: float):
+def calculateMaximumDistance(Q:float, q:float, m: float, Vi: float, r1: float):
     #Epsillon 0 constant, dielectric constante fo the void
     Eo = decimal.Decimal(8.85e-12)
     #Charge of the sphere
@@ -45,9 +46,15 @@ def calculateMaximumDistance(Q:float, q:float, m: float, Vi: float):
     #Initial velocity provided by the user
     Vi = decimal.Decimal(Vi)
 
+    #Calculating Initial Electric Potential Energy
+    Ui = decimal.Decimal(calculateInitialElectricPotentialEnergy(Q,q,r1))
+    print("Potencial electrica en el Xmax: ", Ui)
+    #Calculating Inistial Kinnetic Energy
+    Ki = decimal.Decimal( (m * Vi * Vi) / 2 )
+
     decimalPi = decimal.Decimal(math.pi)
     
-    MaxDistance = (Q*q)/(2*decimalPi*Eo*m*decimal.Decimal( math.pow(Vi,2) ))
+    MaxDistance = (Q*q)/(4*decimalPi*Eo* (Ki + Ui) )
 
     MaxDistance = round(MaxDistance, 3)
     return MaxDistance
@@ -72,12 +79,38 @@ def calculateMaximumCharge(q: float, m:float, R:float):
 
     return MaxQ
 
-result1UEL = calculateInitialElectricPotentialEnergy(-2e-6, 3.5e-6, 0.250)
-result2VEL = calculateMinimumScapeVelocity(result1UEL, 1.50e-3)
-result3DIST = calculateMaximumDistance(3.5e-6, 2e-6,  1.50e-3, result2VEL)
-result4MAXQ = calculateMaximumCharge(-2e-6, 1.50e-3, 0.250e-8)
+def drawMaxdistanceNoScape(maxDistance: float):
+    sphereTurtle = turtle.Turtle()
+    sphereTurtle.teleport(0,0)
+    sphereTurtle.pensize(5)
+    sphereTurtle.shape("circle")
+    sphereTurtle.color('#403d9e')
 
-print("U inicial: ", result1UEL, "J")
-print("Velocidad escape: ", result2VEL, "m/s")
-print("Distancia maxima: ", result3DIST, "m")
-print("Carga antes de agujero negro: ", result4MAXQ, "C")
+    dividedDistnace = maxDistance/3
+
+    for i in range (0, 4):
+        sphereTurtle.speed(10 - 3*i)
+        sphereTurtle.forward(dividedDistnace)
+
+    time.sleep(0.25)
+
+    for i in range (0,4):
+        sphereTurtle.speed(1 + 3*i)
+        sphereTurtle.backward(dividedDistnace)
+
+
+def drawScapeAnimation(scapeDistance: float):
+    sphereTurtle = turtle.Turtle()
+    sphereTurtle.teleport(0,0)
+    sphereTurtle.pensize(5)
+    sphereTurtle.shape("circle")
+    sphereTurtle.color('#403d9e')
+
+    dividedDistance = scapeDistance/3
+
+    for i in range (0, 4):
+        sphereTurtle.speed(10 - 3*i)
+        sphereTurtle.forward(dividedDistance)
+
+    sphereTurtle.forward(200)
+    print("la particula ha escapado")
