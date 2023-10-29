@@ -1,6 +1,48 @@
 import tkinter as tk
 from tkinter import ttk
 import Simulation
+import PlaneMathDraw
+import decimal
+
+LIGHT_SPEED = 2.998e8
+
+# Specific Particles
+def setParticlesStats(event):
+    selection = particleList.get()
+
+    if(selection == "Partícula Personalizada"):
+        particleChargeEntry.config(state=tk.ACTIVE)
+        weightEntry.config(state=tk.ACTIVE)
+
+    if(selection == "Protón"):
+        particleChargeEntry.set(1.6e-19)
+        weightEntry.set(1.67e-27)
+        particleChargeEntry.config(state=tk.DISABLED)
+        weightEntry.config(state=tk.DISABLED)
+
+    elif(selection == "Positrón"):
+        particleChargeEntry.set(1.6e-19)
+        weightEntry.set(9.11e-31)
+        particleChargeEntry.config(state=tk.DISABLED)
+        weightEntry.config(state=tk.DISABLED)
+
+    elif(selection == "Partícula Alfa"):
+        particleChargeEntry.set(3.2e-19)
+        weightEntry.set(6.64e-27)
+        particleChargeEntry.config(state=tk.DISABLED)
+        weightEntry.config(state=tk.DISABLED)
+
+    elif(selection == "Núcleo de Litio"):
+        particleChargeEntry.set(4.8e-19)
+        weightEntry.set(11.67e-27)
+        particleChargeEntry.config(state=tk.DISABLED)
+        weightEntry.config(state=tk.DISABLED)
+
+    elif(selection == "Núcleo de Carbón"):
+        particleChargeEntry.set(9.6e-19)
+        weightEntry.set(20.04e-27)
+        particleChargeEntry.config(state=tk.DISABLED)
+        weightEntry.config(state=tk.DISABLED)
 
 # Figure Frame Enabler/Disabler
 def figureEnabler():
@@ -18,22 +60,39 @@ def buttonEnabler():
     sphereElements = ["sphere", radioEntry.get(), chargeEntry.get(), particleList.get(), particleChargeEntry.get(), weightEntry.get(), speedEntry.get()]
     planeElements = ["plane", densityEntry.get() ,particleChargeEntry.get(), particleList.get(), weightEntry.get(), speedEntry.get()]
     selection = figureSelection.get()
-    if(selection == 1):
+    speed = decimal.Decimal(speedEntry.get())
+    if(selection == 1 and speed < LIGHT_SPEED):
         if all(elements != "" for elements in sphereElements):
             Simulation.Simulation(sphereElements)
 
         else:
-            print("Faltan campos")
+            errorWindow = tk.Tk()
+            errorWindow.resizable(False, False)
+            errorWindow.title("¡ERROR!")
+            lightSpeedLabel = ttk.Label(errorWindow, text="Asegúrate de llenar todos los campos.")
+            lightSpeedLabel.pack()
 
-    elif(selection == 2):
+    elif(selection == 2 and speed < LIGHT_SPEED):
         if all(elements != "" for elements in planeElements):
+            planeDistanceLabel.config(text="Distancia recorrida: " + str(PlaneMathDraw.planeDistance(planeElements)) + " m")
             Simulation.Simulation(planeElements)
 
         else:
             print("Faltan campos")
 
+    elif(speed > LIGHT_SPEED):
+        errorWindow = tk.Tk()
+        errorWindow.resizable(False, False)
+        errorWindow.title("¡ERROR!")
+        lightSpeedLabel = ttk.Label(errorWindow, text="Ingresa una velocidad menor o igual a la velocidad de la luz en el vacío (2.998x10^8).")
+        lightSpeedLabel.pack()
+    
     else:
-        print("Faltan campos")
+        errorWindow = tk.Tk()
+        errorWindow.resizable(False, False)
+        errorWindow.title("¡ERROR!")
+        lightSpeedLabel = ttk.Label(errorWindow, text="Asegúrate de llenar todos los campos.")
+        lightSpeedLabel.pack()
 
 # Main Window
 root = tk.Tk()
@@ -92,12 +151,14 @@ sphereChargeDimension = ttk.Label(sphereFrame, text="C").grid(row=1, column=2)
 
 # Plane Frame
 densityLabel = ttk.Label(planeFrame, text="Densidad de carga: ")
+planeDistanceLabel = ttk.Label(planeFrame, text="Distancia recorrida: ") 
 
 densityEntry = ttk.Spinbox(planeFrame, from_=0.5, to=500, increment=0.1)
 
 densityLabel.grid(row=0, column=0, sticky=tk.W, pady=20)
 densityEntry.grid(row=0, column=1, sticky=tk.W)
-densityDimension = ttk.Label(planeFrame, text="C/m^2").grid(row=0, column=2)
+densityDimension = ttk.Label(planeFrame, text="µC/m^2").grid(row=0, column=2)
+planeDistanceLabel.grid(row=1, column=0, sticky=tk.E)
 
 # Particle Frame
 particleLabel = ttk.Label(particleFrame, text="Partícula: ")
@@ -108,8 +169,10 @@ speedLabel = ttk.Label(particleFrame, text="Velocidad Inicial: ")
 particleChargeEntry = ttk.Spinbox(particleFrame, from_=0.5, to=500, increment=0.1)
 weightEntry = ttk.Spinbox(particleFrame, from_=0.5, to=100, increment=0.1)
 speedEntry = ttk.Spinbox(particleFrame, from_=0.5, to=500, increment=0.1)
+speedEntry.set(1)
 
-particleList = ttk.Combobox(particleFrame, state="readonly", values=["Protón","Neutrón", "Electrón", "Partícula Alfa"])
+particleList = ttk.Combobox(particleFrame, state="readonly", values=["Partícula Personalizada","Protón","Núcleo de Litio", "Positrón", "Partícula Alfa", "Núcleo de Carbón"])
+particleList.bind("<<ComboboxSelected>>", setParticlesStats)
 
 particleLabel.grid(row=0, column=0, sticky=tk.W, pady=10)
 particleChargeLabel.grid(row=1, column=0, sticky=tk.W)

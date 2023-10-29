@@ -1,7 +1,7 @@
 import turtle
 from turtle import RawTurtle, ScrolledCanvas
-import decimal
 import math
+import decimal
 
 def DrawCircle(tr: turtle, height: float, width: float, outline: float, color: str):
     tr.pensize(outline)
@@ -17,7 +17,7 @@ def InfinitePlain(ScreenHeight: float, t2: turtle):
     xWidth = ScreenHeight * 0.2
     zLength: float = ScreenHeight
     t2.penup()
-    t2.setpos(- (xWidth/2 + math.sin(math.pi / 4) * zLength) / 2, - ( math.cos(math.pi / 4) * zLength ) / 2)
+    t2.teleport(- (xWidth/2 + math.sin(math.pi / 4) * zLength) / 2, - ( math.cos(math.pi / 4) * zLength ) / 2)
     t2.pendown()
     t2.speed(10)
 

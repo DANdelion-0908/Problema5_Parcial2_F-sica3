@@ -1,8 +1,8 @@
 from drawings import *
 import turtle
 from axis import *
-
-
+import PlaneMathDraw
+    
 def Simulation(figureList: list):
     for x in figureList:
         print(x)
@@ -27,6 +27,7 @@ def Simulation(figureList: list):
 
     elif(figureList[0] == "plane"):
         InfinitePlain(200, gorge)
+        PlaneMathDraw.planeDrawing(PlaneMathDraw.planeDistance(figureList))
 
     turtle.setup(800, verticalScreensize - 150)
     turtle.screensize(horizontalScreenSize, verticalScreensize)
