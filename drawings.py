@@ -17,7 +17,8 @@ def InfinitePlain(ScreenHeight: float, t2: turtle):
     xWidth = ScreenHeight * 0.2
     zLength: float = ScreenHeight
     t2.penup()
-    t2.teleport(- (xWidth/2 + math.sin(math.pi / 4) * zLength) / 2, - ( math.cos(math.pi / 4) * zLength ) / 2)
+    t2.speed(0)
+    t2.setposition(- (xWidth/2 + math.sin(math.pi / 4) * zLength) / 2, - ( math.cos(math.pi / 4) * zLength ) / 2)
     t2.pendown()
     t2.speed(10)
 
@@ -65,7 +66,8 @@ def Sphere(radius: float, t1: turtle):
     #Initial setup
     t1.pensize(5)
     t1.penup()
-    t1.teleport(0, -1*radius)
+    t1.speed(0)
+    t1.setposition(0, -1*radius)
     t1.pendown()
     t1.speed(10)
     #Drawing half of the circle

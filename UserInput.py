@@ -28,13 +28,13 @@ def setParticlesStats(event):
 
     elif(selection == "Partícula Alfa"):
         particleChargeEntry.set(3.2e-19)
-        weightEntry.set(6.64e-27)
+        weightEntry.set(6.68e-27)
         particleChargeEntry.config(state=tk.DISABLED)
         weightEntry.config(state=tk.DISABLED)
 
     elif(selection == "Núcleo de Litio"):
         particleChargeEntry.set(4.8e-19)
-        weightEntry.set(11.67e-27)
+        weightEntry.set(1.169e-26)
         particleChargeEntry.config(state=tk.DISABLED)
         weightEntry.config(state=tk.DISABLED)
 
@@ -78,7 +78,11 @@ def buttonEnabler():
             Simulation.Simulation(planeElements)
 
         else:
-            print("Faltan campos")
+            errorWindow = tk.Tk()
+            errorWindow.resizable(False, False)
+            errorWindow.title("¡ERROR!")
+            lightSpeedLabel = ttk.Label(errorWindow, text="Asegúrate de llenar todos los campos.")
+            lightSpeedLabel.pack()
 
     elif(speed > LIGHT_SPEED):
         errorWindow = tk.Tk()
@@ -147,7 +151,7 @@ radioEntry.grid(row=0, column=1, sticky=tk.W, pady=10)
 chargeEntry.grid(row=1, column=1, sticky=tk.W)
 
 radioDimension = ttk.Label(sphereFrame, text="m").grid(row=0, column=2)
-sphereChargeDimension = ttk.Label(sphereFrame, text="C").grid(row=1, column=2)
+sphereChargeDimension = ttk.Label(sphereFrame, text="µC").grid(row=1, column=2)
 
 # Plane Frame
 densityLabel = ttk.Label(planeFrame, text="Densidad de carga: ")
@@ -184,7 +188,7 @@ particleChargeEntry.grid(row=1, column=1, sticky=tk.W)
 weightEntry.grid(row=2, column=1, sticky=tk.W)
 speedEntry.grid(row=3, column=1, sticky=tk.W)
 
-chargeDimension = ttk.Label(particleFrame, text="C").grid(row=1, column=2)
+chargeDimension = ttk.Label(particleFrame, text="µC").grid(row=1, column=2)
 weightDimension = ttk.Label(particleFrame, text="kg").grid(row=2, column=2)
 speedDimension = ttk.Label(particleFrame, text="m/s").grid(row=3, column=2)
 
