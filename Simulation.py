@@ -47,6 +47,7 @@ def Simulation(figureList: list):
         else:
             Sphere(sphereRadius, gorge)
             scapeDistance = calculateMaximumDistance(Q = sphereCharge, q = particleCharge, m= particleMass, Vi= scapeVelocity, r1= sphereRadius)
+            print("Scape ", scapeDistance)
             drawScapeAnimation(scapeDistance, sphereRadius)
             print("escapa")
 

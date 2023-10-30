@@ -111,14 +111,14 @@ def drawScapeAnimation(scapeDistance: float, radius: float):
 
     dividedDistance = scapeDistance/3
 
-    if(scapeDistance > 2000):
-        sphereTurtle.speed(10)
-        sphereTurtle.forward(scapeDistance)
-        sphereTurtle.backward(scapeDistance)
+    # if(scapeDistance > 2000):
+    #     sphereTurtle.speed(10)
+    #     sphereTurtle.forward(scapeDistance)
+    #     sphereTurtle.backward(scapeDistance)
 
-    else:
-        for i in range (0, 4):
-            sphereTurtle.speed(10 - 3*i)
-            sphereTurtle.forward(dividedDistance)
-
-        sphereTurtle.forward(200)
+    # else:
+    #     for i in range (0, 4):
+    #         sphereTurtle.speed(10 - 3*i)
+    #         sphereTurtle.forward(dividedDistance)
+    sphereTurtle.speed(8)
+    sphereTurtle.forward(2000)
