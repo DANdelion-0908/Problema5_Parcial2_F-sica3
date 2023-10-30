@@ -85,8 +85,8 @@ def drawMaxdistanceNoScape(maxDistance: float, radius: float):
 
     if(maxDistance > 2000):
         sphereTurtle.speed(10)
-        sphereTurtle.forward(maxDistance)
-        sphereTurtle.backward(maxDistance)
+        sphereTurtle.forward(2000)
+        sphereTurtle.backward(2000)
 
     else:
         for i in range (0, 4):
@@ -109,16 +109,5 @@ def drawScapeAnimation(scapeDistance: float, radius: float):
     sphereTurtle.shape("circle")
     sphereTurtle.color('#403d9e')
 
-    dividedDistance = scapeDistance/3
-
-    # if(scapeDistance > 2000):
-    #     sphereTurtle.speed(10)
-    #     sphereTurtle.forward(scapeDistance)
-    #     sphereTurtle.backward(scapeDistance)
-
-    # else:
-    #     for i in range (0, 4):
-    #         sphereTurtle.speed(10 - 3*i)
-    #         sphereTurtle.forward(dividedDistance)
     sphereTurtle.speed(8)
     sphereTurtle.forward(2000)

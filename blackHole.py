@@ -9,7 +9,7 @@ def spawnBlackHole():
     label_image = Label(root, image=image)
     label_image.pack(side=TOP)
 
-    aclarationLabel = Label(root, text="La partícula se ha convertido en un agujero negro.", font=500)
+    aclarationLabel = Label(root, text="La esfera se ha convertido en un agujero negro.", font=500)
     aclarationLabel.pack(side=BOTTOM)
 
     root.mainloop()

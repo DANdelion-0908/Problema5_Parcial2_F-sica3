@@ -65,8 +65,10 @@ def buttonEnabler():
     speed = decimal.Decimal(speedEntry.get())
     if(selection == 1 and speed < LIGHT_SPEED):
 
-        maximumCharge = SphereMath.calculateMaximumCharge(q= sphereElements[4], m= sphereElements[5], R= sphereElements[1])
-        if(decimal.Decimal(sphereElements[2]) > maximumCharge):
+        initialUEL = SphereMath.calculateInitialElectricPotentialEnergy(Q= float(sphereElements[2]), q= float(sphereElements[4]), r= float(sphereElements[1]))
+        scapeVelocity = SphereMath.calculateMinimumScapeVelocity(Ki = initialUEL, m= float(sphereElements[5]) )
+        
+        if( scapeVelocity > LIGHT_SPEED):
             blackHole.spawnBlackHole()
 
         elif all(elements != "" for elements in sphereElements):

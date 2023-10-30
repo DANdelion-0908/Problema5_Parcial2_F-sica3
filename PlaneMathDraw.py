@@ -15,12 +15,12 @@ def planeDrawing(distance: float):
     planeTurtle.shape("circle")
     planeTurtle.color('#403d9e')
     planeTurtle.setposition(0,50)
-    planeTurtle.pendown(distance)
+    planeTurtle.pendown()
 
     if (distance > 2000):
-        planeTurtle.speed(0)
-        planeTurtle.forward(distance)
-        planeTurtle.backward(distance)
+        planeTurtle.speed(10)
+        planeTurtle.forward(2000)
+        planeTurtle.backward(2000)
 
     else :
         dividedDistance = distance/ 3
