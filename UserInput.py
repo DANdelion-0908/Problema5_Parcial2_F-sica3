@@ -5,8 +5,19 @@ import PlaneMathDraw
 import decimal
 import SphereMath
 import blackHole
+import sys
 
 LIGHT_SPEED = 2.998e8
+
+def showDanChuy():
+    scapeLabel
+
+def githubLink():
+    scapeLabel
+    
+# Exit Function
+def exit():
+    sys.exit()
 
 # Specific Particles
 def setParticlesStats(event):
@@ -67,12 +78,22 @@ def buttonEnabler():
 
         initialUEL = SphereMath.calculateInitialElectricPotentialEnergy(Q= float(sphereElements[2]), q= float(sphereElements[4]), r= float(sphereElements[1]))
         scapeVelocity = SphereMath.calculateMinimumScapeVelocity(Ki = initialUEL, m= float(sphereElements[5]) )
+        sphereDistance = SphereMath.calculateMaximumDistance(Q= float(sphereElements[2]), q= float(sphereElements[4]), m= float(sphereElements[5]), Vi=float(sphereElements[6]), r1=float(sphereElements[1]))
         
         if( scapeVelocity > LIGHT_SPEED):
             blackHole.spawnBlackHole()
 
         elif all(elements != "" for elements in sphereElements):
-            Simulation.Simulation(sphereElements)
+
+            if(speed >= scapeVelocity):
+                scapeLabel.config(text="Velocidad de escape: " + str(scapeVelocity) + " m/s")
+                sphereDistanceLabel.config(text="La partícula ha escapado del campo.", font="bold")
+                Simulation.Simulation(sphereElements)
+
+            else:
+                scapeLabel.config(text="Velocidad de escape: " + str(scapeVelocity) + " m/s")
+                sphereDistanceLabel.config(text="Distancia recorrida: " + str(sphereDistance) + " m")
+                Simulation.Simulation(sphereElements)
 
         else:
             errorWindow = tk.Tk()
@@ -112,6 +133,21 @@ root = tk.Tk()
 root.title('Disparador de Partículas')
 root.resizable(False, False)
 
+# Creating menu bar
+menuBar = tk.Menu()
+
+actionsMenu = tk.Menu(menuBar, tearoff=False)
+aboutMenu = tk.Menu(menuBar, tearoff=False)
+
+actionsMenu.add_command(label="Cerrar todo", command=exit)
+
+aboutMenu.add_command(label="Autores", command=showDanChuy)
+aboutMenu.add_command(label="GitHub", command=githubLink)
+
+menuBar.add_cascade(menu=actionsMenu, label="Acciones")
+menuBar.add_cascade(menu=aboutMenu, label="Acerca de")
+root.config(menu=menuBar)
+
 # Creating notebook to store the frames
 notebook = ttk.Notebook(root)
 notebook.pack(expand=True, fill='both')
@@ -148,12 +184,18 @@ planeRadiobutton = ttk.Radiobutton(shapeFrame,
 # Sphere Frame
 radioLabel = ttk.Label(sphereFrame, text="Radio: ")
 chargeLabel = ttk.Label(sphereFrame, text="Carga: ")
+scapeLabel = ttk.Label(sphereFrame, text="Velocidad de escape: ")
+sphereDistanceLabel = ttk.Label(sphereFrame, text="DIstancia recorrida: ")
 
 radioEntry = ttk.Spinbox(sphereFrame, from_=0.5, to=200, increment=0.1)
+radioEntry.set(1)
 chargeEntry = ttk.Spinbox(sphereFrame, from_=0.5, to=200, increment=0.1)
+chargeEntry.set(1)
 
 radioLabel.grid(row=0, column=0, sticky= tk.W, pady=10)
 chargeLabel.grid(row=1, column=0, sticky=tk.W)
+scapeLabel.grid(row=2, column=0, sticky=tk.W, pady=10)
+sphereDistanceLabel.grid(row=3, column=0, sticky=tk.W)
 
 radioEntry.grid(row=0, column=1, sticky=tk.W, pady=10)
 chargeEntry.grid(row=1, column=1, sticky=tk.W)
@@ -166,6 +208,7 @@ densityLabel = ttk.Label(planeFrame, text="Densidad de carga: ")
 planeDistanceLabel = ttk.Label(planeFrame, text="Distancia recorrida: ") 
 
 densityEntry = ttk.Spinbox(planeFrame, from_=0.5, to=500, increment=0.1)
+densityEntry.set(1)
 
 densityLabel.grid(row=0, column=0, sticky=tk.W, pady=20)
 densityEntry.grid(row=0, column=1, sticky=tk.W)
@@ -179,7 +222,9 @@ weightLabel = ttk.Label(particleFrame, text="Masa: ")
 speedLabel = ttk.Label(particleFrame, text="Velocidad Inicial: ")
 
 particleChargeEntry = ttk.Spinbox(particleFrame, from_=0.5, to=500, increment=0.1)
+particleChargeEntry.set(1)
 weightEntry = ttk.Spinbox(particleFrame, from_=0.5, to=100, increment=0.1)
+weightEntry.set(1)
 speedEntry = ttk.Spinbox(particleFrame, from_=0.5, to=500, increment=0.1)
 speedEntry.set(1)
 
