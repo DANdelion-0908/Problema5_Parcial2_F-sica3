@@ -17,8 +17,6 @@ def calculateInitialElectricPotentialEnergy(Q: float, q: float, r: float):
 
     U = (Q*q)/(4*decimalPi*Eo*r)
 
-    # Round the result to three decimal places
-    U = round(U,3)
     return U
 
 
@@ -31,7 +29,6 @@ def calculateMinimumScapeVelocity(Ki: float, m: float):
     Vi = math.sqrt( (2*Ki)/(m) )
     Vi = decimal.Decimal(Vi)
 
-    Vi = round(Vi, 1)
     return Vi
 
 def calculateMaximumDistance(Q:float, q:float, m: float, Vi: float, r1: float):
@@ -48,7 +45,6 @@ def calculateMaximumDistance(Q:float, q:float, m: float, Vi: float, r1: float):
 
     #Calculating Initial Electric Potential Energy
     Ui = decimal.Decimal(calculateInitialElectricPotentialEnergy(Q,q,r1))
-    print("Potencial electrica en el Xmax: ", Ui)
     #Calculating Inistial Kinnetic Energy
     Ki = decimal.Decimal( (m * Vi * Vi) / 2 )
 
@@ -56,7 +52,6 @@ def calculateMaximumDistance(Q:float, q:float, m: float, Vi: float, r1: float):
     
     MaxDistance = (Q*q)/(4*decimalPi*Eo* (Ki + Ui) )
 
-    MaxDistance = round(MaxDistance, 3)
     return MaxDistance
 
 def calculateMaximumCharge(q: float, m:float, R:float):
@@ -75,42 +70,55 @@ def calculateMaximumCharge(q: float, m:float, R:float):
 
     MaxQ = (2*decimalPi*Eo*m*R* C*C)/(q)
 
-    MaxQ = round(MaxQ, 1)
-
     return MaxQ
 
-def drawMaxdistanceNoScape(maxDistance: float):
+def drawMaxdistanceNoScape(maxDistance: float, radius: float):
+    maxDistance = float(maxDistance)
+    radius = float(radius)
     sphereTurtle = turtle.Turtle()
-    sphereTurtle.teleport(0,0)
+    sphereTurtle.setposition(radius,0)
     sphereTurtle.pensize(5)
     sphereTurtle.shape("circle")
     sphereTurtle.color('#403d9e')
 
     dividedDistnace = maxDistance/3
 
-    for i in range (0, 4):
-        sphereTurtle.speed(10 - 3*i)
-        sphereTurtle.forward(dividedDistnace)
+    if(maxDistance > 2000):
+        sphereTurtle.speed(10)
+        sphereTurtle.forward(maxDistance)
+        sphereTurtle.backward(maxDistance)
 
-    time.sleep(0.25)
+    else:
+        for i in range (0, 4):
+            sphereTurtle.speed(10 - 3*i)
+            sphereTurtle.forward(dividedDistnace)
 
-    for i in range (0,4):
-        sphereTurtle.speed(1 + 3*i)
-        sphereTurtle.backward(dividedDistnace)
+        time.sleep(0.25)
+
+        for i in range (0,4):
+            sphereTurtle.speed(1 + 3*i)
+            sphereTurtle.backward(dividedDistnace)
 
 
-def drawScapeAnimation(scapeDistance: float):
+def drawScapeAnimation(scapeDistance: float, radius: float):
+    scapeDistance = float(scapeDistance)
+    radius = float(radius)
     sphereTurtle = turtle.Turtle()
-    sphereTurtle.teleport(0,0)
+    sphereTurtle.setposition(radius,0)
     sphereTurtle.pensize(5)
     sphereTurtle.shape("circle")
     sphereTurtle.color('#403d9e')
 
     dividedDistance = scapeDistance/3
 
-    for i in range (0, 4):
-        sphereTurtle.speed(10 - 3*i)
-        sphereTurtle.forward(dividedDistance)
+    if(scapeDistance > 2000):
+        sphereTurtle.speed(10)
+        sphereTurtle.forward(scapeDistance)
+        sphereTurtle.backward(scapeDistance)
 
-    sphereTurtle.forward(200)
-    print("la particula ha escapado")
+    else:
+        for i in range (0, 4):
+            sphereTurtle.speed(10 - 3*i)
+            sphereTurtle.forward(dividedDistance)
+
+        sphereTurtle.forward(200)
