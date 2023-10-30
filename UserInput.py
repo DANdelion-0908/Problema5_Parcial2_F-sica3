@@ -109,7 +109,6 @@ def buttonEnabler():
 
 # Main Window
 root = tk.Tk()
-# root.config(width=500, height=500)
 root.title('Disparador de Partículas')
 root.resizable(False, False)
 
