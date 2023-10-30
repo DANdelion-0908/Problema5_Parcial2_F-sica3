@@ -3,6 +3,8 @@ from tkinter import ttk
 import Simulation
 import PlaneMathDraw
 import decimal
+import SphereMath
+import blackHole
 
 LIGHT_SPEED = 2.998e8
 
@@ -62,7 +64,12 @@ def buttonEnabler():
     selection = figureSelection.get()
     speed = decimal.Decimal(speedEntry.get())
     if(selection == 1 and speed < LIGHT_SPEED):
-        if all(elements != "" for elements in sphereElements):
+
+        maximumCharge = SphereMath.calculateMaximumCharge(q= sphereElements[4], m= sphereElements[5], R= sphereElements[1])
+        if(decimal.Decimal(sphereElements[2]) > maximumCharge):
+            blackHole.spawnBlackHole()
+
+        elif all(elements != "" for elements in sphereElements):
             Simulation.Simulation(sphereElements)
 
         else:

@@ -34,7 +34,6 @@ def Simulation(figureList: list):
 
         initialUEL = calculateInitialElectricPotentialEnergy(Q= sphereCharge, q= particleCharge, r= sphereRadius)
         scapeVelocity = calculateMinimumScapeVelocity(Ki = initialUEL, m= particleMass)
-        maximumCharge = calculateMaximumCharge(q= particleCharge, m= particleMass, R= sphereRadius)
         maxDistance = calculateMaximumDistance(Q = sphereCharge, q = particleCharge, m= particleMass, Vi= initialvelocity, r1= sphereRadius)
 
         print(scapeVelocity)
