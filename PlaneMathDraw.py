@@ -5,7 +5,7 @@ import time
 
 # Calculate maximun distance traveled by the particle
 def planeDistance(elements: list):
-    distance = abs(float(float(elements[4]) * pow(float(elements[5]), 2)) / (((float(elements[2])) * (float(elements[1])))))
+    distance = abs((float(elements[4]) * pow(float(elements[5]), 2)) / (((float(elements[2])) * (float(elements[1]))))) * 8.85e-12
     return distance
 
 def planeDrawing(distance: float):

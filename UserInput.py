@@ -8,12 +8,6 @@ import blackHole
 import sys
 
 LIGHT_SPEED = 2.998e8
-
-def showDanChuy():
-    scapeLabel
-
-def githubLink():
-    scapeLabel
     
 # Exit Function
 def exit():
@@ -141,11 +135,7 @@ aboutMenu = tk.Menu(menuBar, tearoff=False)
 
 actionsMenu.add_command(label="Cerrar todo", command=exit)
 
-aboutMenu.add_command(label="Autores", command=showDanChuy)
-aboutMenu.add_command(label="GitHub", command=githubLink)
-
 menuBar.add_cascade(menu=actionsMenu, label="Acciones")
-menuBar.add_cascade(menu=aboutMenu, label="Acerca de")
 root.config(menu=menuBar)
 
 # Creating notebook to store the frames
