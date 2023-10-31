@@ -3,7 +3,7 @@ from PIL import ImageTk, Image
 
 def spawnBlackHole():
     root = Toplevel()
-    image_path = "res/black_hole_image.png"
+    image_path = "res\\black_hole_image.png"
     image = ImageTk.PhotoImage(Image.open(image_path))
 
     label_image = Label(root, image=image)
