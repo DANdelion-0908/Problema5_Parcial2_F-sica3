@@ -2,7 +2,7 @@
 
 ## Requisitos
 
-Para que el programa funcione correctamente, es necesario instalar Python desde Microsoft Store o su página oficial y los siguientes módulos mediante el comando "pip install":
+Para que el programa funcione correctamente, se debe ejecutar desde el archivo llamado "UserInput.py", instalar Python desde Microsoft Store o su página oficial y los siguientes módulos mediante el comando "pip install":
 
 - pillow
 
